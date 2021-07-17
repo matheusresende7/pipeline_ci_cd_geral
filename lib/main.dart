@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Teste5',
+              'Appbundle, Apk, iOS, Web - Firebase: Done.',
             ),
             Text(
               '$_counter',
