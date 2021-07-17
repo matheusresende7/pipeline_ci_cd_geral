@@ -11,6 +11,7 @@ on:
       - develop
 
 jobs:
+
   flutter_test:
     name: Run Flutter analyze and test
     runs-on: ubuntu-latest

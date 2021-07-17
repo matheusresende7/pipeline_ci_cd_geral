@@ -7,6 +7,7 @@ on:
   # nome da versao tem que ser com v minusculo. Ex: v1.0.5 ou v2.5.0
 
 jobs:
+
   flutter_test:
     name: Run Flutter analyze and test
     runs-on: ubuntu-latest
@@ -90,3 +91,22 @@ jobs:
         with:
           name: apk
           path: build/app/outputs/apk/release/app-armeabi-v7a-release.apk
+
+  build_and_deploy_firebase_hosting:
+    name: Build Flutter (Web - Firebase Hosting)
+    needs: [flutter_test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '2.0.5'
+      - run: flutter pub get
+      - run: flutter test
+      - run: flutter build web
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TESTES_GERAIS_FF1BF }}'
+          channelId: live
+          projectId: testes-gerais-ff1bf
